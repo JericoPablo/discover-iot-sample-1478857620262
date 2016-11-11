@@ -57,12 +57,13 @@ app.get('/credentials', function(req, res) {
 });
 
 app.get('isDeviceMoving', function(req, res) {
-	
+	 var Client = require("ibmiotf");
      var appClientConfig = {
       "org": basicConfig.org,
       "id": 'myapp',
-      "auth-key": 'a-xxxxxxx-zenkqyfiea',
-      "auth-token": 'xxxxxxxxxx'
+      "auth-key": credentials.apiKey,
+      "auth-token": credentials.apiToken,
+      "type": "shared" 
 	}
 
     var appClient = new Client.IotfApplication(appClientConfig);
@@ -71,7 +72,7 @@ app.get('isDeviceMoving', function(req, res) {
 
     appClient.on("connect", function () {
 
-        appClient.subscribeToDeviceEvents("myDeviceType","device01","+","json");
+        appClient.subscribeToDeviceEvents("iot-phone","Tugrul","+","json");
 
     });
     appClient.on("deviceEvent", function (deviceType, deviceId, eventType, format, payload) {
