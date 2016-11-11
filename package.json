@@ -10,7 +10,7 @@
     "cfenv": "1.0.x",
     "express": "4.12.x",
     "https": "^1.0.0",
-      "ibmiotf": "0.2.25"
+    "ibmiotf": "0.2.25"
   },
   "repository": {},
   "engines": {
