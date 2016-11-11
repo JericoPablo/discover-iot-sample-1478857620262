@@ -56,7 +56,7 @@ app.get('/credentials', function(req, res) {
 	res.json(basicConfig);
 });
 
-app.get('isDeviceMoving', function(req, res) {
+app.get('/isDeviceMoving', function(req, res) {
 	 var Client = require("ibmiotf");
      var appClientConfig = {
       "org": basicConfig.org,
