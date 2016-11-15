@@ -57,6 +57,8 @@ app.get('/credentials', function(req, res) {
 	res.json(basicConfig);
 });
 
+
+
 app.get('/isDeviceMoving', function(req, res) {
 	 var Client = require("ibmiotf");
      var appClientConfig = {
@@ -73,18 +75,21 @@ app.get('/isDeviceMoving', function(req, res) {
 
     appClient.on("connect", function () {
 
-    appClient.subscribeToDeviceEvents("iot-phone","Tugrul","+","json");
+    appClient.subscribeToDeviceEvents("+","Tugrul","+","json");
         console.log("Connected");
 
     });
+    
+    appClient.on("error", function (err) {
+        console.log("Error : "+err);
+    });
+    
     appClient.on("deviceEvent", function (deviceType, deviceId, eventType, format, payload) {
 
         console.log("Device Event from :: "+deviceType+" : "+deviceId+" of event "+eventType+" with payload : "+payload);
 
     });
 });
-
-
 app.get('/iotServiceLink', function(req, res) {
 	var options = {
 		host: basicConfig.org + '.internetofthings.ibmcloud.com',
