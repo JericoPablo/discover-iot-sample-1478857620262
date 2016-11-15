@@ -8,7 +8,7 @@ var app = express();
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json()); // for parsing application/json
 var appEnv = cfenv.getAppEnv();
-var Client = require("ibmiotf");
+
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
@@ -58,7 +58,7 @@ app.get('/credentials', function(req, res) {
 });
 
 app.get('/isDeviceMoving', function(req, res) {
-	 
+	 var Client = require("ibmiotf");
      var appClientConfig = {
       "org": basicConfig.org,
       "id": 'myapp',
@@ -73,7 +73,8 @@ app.get('/isDeviceMoving', function(req, res) {
 
     appClient.on("connect", function () {
 
-        appClient.subscribeToDeviceEvents("iot-phone","Tugrul","+","json");
+    appClient.subscribeToDeviceEvents("iot-phone","Tugrul","+","json");
+        console.log("Connected");
 
     });
     appClient.on("deviceEvent", function (deviceType, deviceId, eventType, format, payload) {
